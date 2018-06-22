@@ -3,7 +3,7 @@ package com.luck.pictureselector;
 import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
-import com.tencent.bugly.crashreport.CrashReport;
+
 
 /**
  * author：luck
@@ -23,7 +23,6 @@ public class App extends Application {
             return;
         }
         LeakCanary.install(this);
-        //bugly追踪的上报测试时候设置为true
-        CrashReport.initCrashReport(getApplicationContext(), "84c42856dd", true);
+        LeakCanary.install(this);
     }
 }

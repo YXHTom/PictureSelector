@@ -1,8 +1,8 @@
 package com.luck.picture.lib.observable;
 
-import com.yalantis.ucrop.entity.LocalMedia;
-import com.yalantis.ucrop.entity.LocalMediaFolder;
 
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.entity.LocalMediaFolder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +67,9 @@ public class ImagesObservable implements SubjectListener {
      * 读取图片
      */
     public List<LocalMedia> readLocalMedias() {
+        if (medias == null) {
+            medias = new ArrayList<>();
+        }
         return medias;
     }
 
@@ -74,6 +77,9 @@ public class ImagesObservable implements SubjectListener {
      * 读取所有文件夹图片
      */
     public List<LocalMediaFolder> readLocalFolders() {
+        if (folders == null) {
+            folders = new ArrayList<>();
+        }
         return folders;
     }
 
@@ -87,47 +93,26 @@ public class ImagesObservable implements SubjectListener {
 
 
     public void clearLocalFolders() {
-        if (folders != null)
+        if (folders != null) {
             folders.clear();
+        }
     }
 
     public void clearLocalMedia() {
-        if (medias != null)
+        if (medias != null) {
             medias.clear();
+        }
     }
 
     public void clearSelectedLocalMedia() {
-        if (selectedImages != null)
+        if (selectedImages != null) {
             selectedImages.clear();
+        }
     }
 
     @Override
     public void add(ObserverListener observerListener) {
         observers.add(observerListener);
-    }
-
-    /**
-     * 相册所有列表文件夹
-     *
-     * @param folders
-     */
-    @Override
-    public void notifyFolderObserver(List<LocalMediaFolder> folders) {
-        for (ObserverListener observerListener : observers) {
-            observerListener.observerUpFoldersData(folders);
-        }
-    }
-
-    /**
-     * 选中图片集合观察者
-     *
-     * @param selectMedias
-     */
-    @Override
-    public void notifySelectLocalMediaObserver(List<LocalMedia> selectMedias) {
-        for (ObserverListener observerListener : observers) {
-            observerListener.observerUpSelectsData(selectMedias);
-        }
     }
 
     @Override

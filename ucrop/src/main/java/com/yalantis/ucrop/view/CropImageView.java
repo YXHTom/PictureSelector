@@ -82,9 +82,8 @@ public class CropImageView extends TransformImageView {
                 compressFormat, compressQuality,
                 getImageInputPath(), getImageOutputPath(), getExifInfo());
 
-        new BitmapCropTask(getViewBitmap(), imageState, cropParameters, cropCallback).execute();
+        new BitmapCropTask(getContext(), getViewBitmap(), imageState, cropParameters, cropCallback).execute();
     }
-
 
     /**
      * @return - maximum scale value for current image and crop ratio
@@ -325,7 +324,7 @@ public class CropImageView extends TransformImageView {
      * First, un-rotate image and crop rectangles (make image rectangle axis-aligned).
      * Second, calculate deltas between those rectangles sides.
      * Third, depending on delta (its sign) put them or zero inside an array.
-     * Fourth, using Matrix, rotate picture_back those points (indents).
+     * Fourth, using Matrix, rotate back those points (indents).
      *
      * @return - the float array of image indents (4 floats) - in this order [left, top, right, bottom]
      */
